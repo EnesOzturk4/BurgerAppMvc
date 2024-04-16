@@ -1,0 +1,94 @@
+﻿@using MVCGrup2.Enums
+@model IEnumerable<MVCGrup2.Entities.Concrete.Order>
+@{
+	string userName = ViewData["User"].ToString();
+	ViewData["Title"] = "Home";
+	double total = 0;
+}
+<h4>Hello @userName!</h4>
+<p>You can manage your orders from here.</p>
+
+<hr />
+<p>
+	<a class="btn btn-outline-success" asp-action="Index">Show All Orders</a>
+	<a class="btn btn-outline-success" asp-action="ShowOnlyActives">Show Active Orders Only</a>
+	<a class="btn btn-outline-success" asp-action="ShowOnlyDelivered">Show Delivered Orders Only</a>
+</p>
+
+<table class="table table-dark table-hover">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.OrderDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.OrderStatus)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.OrderCount)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Total)
+			</th>
+			<th>
+				Manage
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.OrderDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.OrderStatus)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.OrderCount)
+					@{
+						total += item.Total;
+					}
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Total)
+				</td>
+				<td>
+					@if (item.OrderStatus != OrderStatus.Cancelled && item.OrderStatus != OrderStatus.Delivered)
+					{
+						<a class="btn btn-success" asp-action="Manage" asp-route-id="@item.Id">Manage</a>
+					}
+					else
+					{
+						if(item.OrderStatus == OrderStatus.Delivered)
+						{
+							<p style="color:greenyellow">@item.OrderStatus</p>
+						}
+						else
+						{
+							<p style="color:orangered">@item.OrderStatus</p>
+
+						}
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+	<tfoot>
+		<tr>
+			<th>
+			</th>
+			<th>
+			</th>
+			<th>
+			</th>
+			<td style="color:greenyellow">
+				Approx: @Convert.ToInt32(total)
+			</td>
+			<th>
+			</th>
+
+		</tr>
+	</tfoot>
+</table>

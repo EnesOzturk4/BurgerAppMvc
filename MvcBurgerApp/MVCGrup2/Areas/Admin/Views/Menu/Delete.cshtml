@@ -1,0 +1,53 @@
+﻿@using MVCGrup2.Areas.Admin.Models
+@using MVCGrup2.Enums
+@model MenuViewModel
+
+@{
+	ViewData["Title"] = "Delete Menu";
+}
+<p>You can delete a menu from here.</p>
+<hr />
+<link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0">
+<link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="~/css/crud.css">
+<div class="row">
+	<div class="col-md-12">
+		<h3> Menu Information </h3>
+
+		<form asp-action="Delete" method="post">
+			<fieldset>
+
+				<label asp-for="Name">Name</label>
+				<input asp-for="Name" type="text" disabled>
+				<span asp-validation-for="Name" class="text-danger"></span>
+				<hr>
+
+				<label asp-for="Description">Description</label>
+				<input asp-for="Description" type="text" disabled>
+				<span asp-validation-for="Description" class="text-danger"></span>
+				<hr>
+
+				<label asp-for="Price">Price</label>
+				<input asp-for="Price" disabled>
+				<span asp-validation-for="Price" class="text-danger"></span>
+				<hr>
+
+				<label asp-for="Active">Is it active?  <input asp-for="Active" disabled></label>
+				<span asp-validation-for="Active" class="text-danger"></span>
+
+				<hr />
+				<img src="@Model.ImagePath" width="250px" />
+				<label asp-for="Image">Image</label>
+				<input type="file" asp-for="Image" disabled />
+				<span asp-validation-for="Image" class="text-danger"></span>
+				
+				<hr>
+
+
+			</fieldset>
+			<input type="hidden" asp-for="Id" />
+			<button type="submit">Delete</button>
+		</form>
+
+	</div>
+</div>

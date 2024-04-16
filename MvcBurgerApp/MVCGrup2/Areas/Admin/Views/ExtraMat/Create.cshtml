@@ -1,0 +1,57 @@
+﻿@using MVCGrup2.Areas.Admin.Models
+@using MVCGrup2.Enums
+@model ExtraMatViewModel
+
+@{
+	ViewData["Title"] = "Create Extra Mat";
+}
+<p>You can create a new extra mat from here.</p>
+<hr />
+<link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0">
+<link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="~/css/crud.css">
+<div class="row">
+	<div class="col-md-12">
+		<h3> Extra Mat Information </h3>
+
+		<form asp-action="Create" method="post" enctype="multipart/form-data">
+			<fieldset>
+
+				<label asp-for="Name">Name</label>
+				<input asp-for="Name" type="text">
+				<span asp-validation-for="Name" class="text-danger"></span>
+				<hr>
+
+				<label asp-for="Description">Description</label>
+				<input asp-for="Description" type="text">
+				<span asp-validation-for="Description" class="text-danger"></span>
+				<hr>
+
+				<label asp-for="Price">Price</label>
+				<input asp-for="Price">
+				<span asp-validation-for="Price" class="text-danger"></span>
+				<hr>
+
+				<label asp-for="Active">Is it active?  <input asp-for="Active"></label>
+				<span asp-validation-for="Active" class="text-danger"></span>
+
+				<hr />
+				<label asp-for="Image">Image </label>
+
+				<input type="file" asp-for="Image" />
+				<span asp-validation-for="Image" class="text-danger"></span>
+				<hr>
+
+
+			</fieldset>
+			<button type="submit">Create</button>
+		</form>
+
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}
